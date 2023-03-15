@@ -1,0 +1,53 @@
+
+.container{
+    width: 95%;
+    border-bottom: 1px solid #E3E3E3;
+    margin: 0.5rem 0.25rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.visited{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: #FFC700;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+}
+
+.detail{
+    width: 90%;
+}
+
+.container:hover{
+    cursor: pointer;
+}
+
+.title{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    /* margin-top: 0.5rem; */
+}
+
+.date{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin: 0.5rem 0;
+}
+
+.content{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.3rem;
+    transition: all 1s;
+}

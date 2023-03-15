@@ -1,0 +1,14 @@
+node_modules/
+.eslintcache
+.env
+.env.*
+
+build
+uploads/**
+
+# uploads/
+config/**
+config/
+/config
+
+info.log

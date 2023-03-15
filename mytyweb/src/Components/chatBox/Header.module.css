@@ -1,0 +1,47 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 8%;
+    margin: auto;
+    border-bottom: 2px solid black;
+    display: flex;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.img{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0 0.5rem;
+    margin-top: 0;
+}
+
+.img:hover{
+    transform: scale(110%);
+    cursor: pointer;
+}
+
+.book{
+    padding: 0.5rem;
+    line-height: 1.5rem;
+    background-color: #FFC700;
+    border-radius: 2px;
+    border: none;
+    height: 2.2rem;
+    text-align: center;
+}
+
+@media (max-width: 900px){
+    .header{
+        position: fixed;
+    }
+}
+

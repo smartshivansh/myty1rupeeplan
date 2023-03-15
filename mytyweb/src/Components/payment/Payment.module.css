@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.button{
+    align-self: center;
+    width: 9rem;
+    height: 2.5rem;
+    background: #FFC700;
+    border-radius: 5px;
+    margin-top: 1.5rem;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    border: none;
+}
+
+.button:hover{
+    cursor: pointer;
+}
