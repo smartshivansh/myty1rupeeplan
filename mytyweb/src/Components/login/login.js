@@ -9,6 +9,7 @@ import classes from "./login.module.css";
 
 import menu from "../../assets/menu.svg"
 import backbtn from "../../assets/backbtn.svg"
+import Loader from "../loader/Loader"
 
 import Footer from "../footer/Footer";
 import { api } from "../../constants/apis"
@@ -18,6 +19,8 @@ import { useNavigate } from "react-router";
 export default function Login(){
 
     const dispatch = useDispatch();
+
+    const [loading, setLoading] = useState(false)
 
     const [slideDisplay, setSlideDisplay] = useState("none");
     const [slideTransform, setSlideTransform] = useState("translateX(80%)")
@@ -56,9 +59,9 @@ export default function Login(){
       const data = Number(emailOrPhone)
         ? { mobile: emailOrPhone, password, email: null }
         : { email: emailOrPhone, password, mobile: null };
-      // console.log("data", data);
+      console.log("data", data);
   
-      // setLoading(true);
+      setLoading(true);
       axios
         .post(`${api}/login`, data)
         .then((res) => {
@@ -78,7 +81,7 @@ export default function Login(){
 
           localStorage.setItem("isLogedIn", true)
   
-          // setLoading(false);
+          setLoading(false);
           setTimeout(()=>{
             window.location.reload()
           },100)
@@ -91,11 +94,13 @@ export default function Login(){
             setError("This Password is incorrect");
           }
   
-          // setLoading(false);
+          setLoading(false);
         });
     };
 
     return <div className={classes.container} >
+
+              {loading && <Loader />}
 
               <header className={classes.header}>
                  <img src={menu} alt="menu" className={classes.img} onClick={openNotification} />

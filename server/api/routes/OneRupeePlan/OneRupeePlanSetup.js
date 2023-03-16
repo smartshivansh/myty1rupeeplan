@@ -7,9 +7,10 @@ async function OneRupeePlanSetup(req, res){
     try {
         const {coverText, userID, subdomain} = req.body;
 
+        // const exist = 
+
         const user = await OneRupeePlanUser.create({coverText, user_id:userID, subdomain});
         // console.log(user);
-        console.log(userID)
 
         if(user){
             await User.findByIdAndUpdate(userID, {plan: "1-rs-plan", subdomain: subdomain}).then((coll, err) => {

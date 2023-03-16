@@ -17,6 +17,9 @@ import mytyIcon from "../../assets/mytyIcon.svg"
 import SendBubble from "../msgBubbles/SendBubble";
 import ReplyBubble from "../msgBubbles/ReplyBubble";
 import NotificationBubble from "../msgBubbles/NotificationBubble";
+import Loader from "../loader/Loader";
+
+import { chatUpdate } from "../../store/UserSlice";
 
 import { socket } from "../Socket/Socket";
 
@@ -168,7 +171,10 @@ export default function Main(){
         },100)
     }
 
-    return <div className={classes.container}>
+    return <div className={classes.body}>
+    
+    <div className={classes.container}>
+        {/* <Loader /> */}
         <Header onBellClick={openNotification} onMenuClick={openMenuBar} />
         <div className={classes.main}>
             <div id="submain" ref={end} className={classes.subMain}>
@@ -221,7 +227,7 @@ export default function Main(){
                 
                 <p className={classes.name}>{name}</p>
 
-                <div style={{display: isLogedIn ? "none" : "block"}}>
+                <div style={{display: isLogedIn ? "none" : "flex"}} className={classes.sign}>
                    <a className={classes.menuBtn} href="/signup">Signup</a>
                    <a className={classes.menuBtn} href="/login">login</a>
                 </div>
@@ -233,5 +239,6 @@ export default function Main(){
             </main>
             
          </div>
+    </div>
     </div>
 }

@@ -8,7 +8,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    height: 8%;
+    height: 100%;
     margin: auto;
     border-bottom: 2px solid black;
     display: flex;
@@ -31,17 +31,18 @@
 
 .book{
     padding: 0.5rem;
-    line-height: 1.5rem;
     background-color: #FFC700;
     border-radius: 2px;
     border: none;
     height: 2.2rem;
     text-align: center;
+    display: flex;
+    align-items: center;
 }
 
-@media (max-width: 900px){
+/* @media (max-width: 900px){
     .header{
         position: fixed;
     }
-}
+} */
 

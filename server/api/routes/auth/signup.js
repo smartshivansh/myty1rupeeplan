@@ -67,6 +67,7 @@ Router.post("/check-user", async (req, res) => {
   const { email, mobile, name, username, password } = req.body;
 
   const userData = { email, mobile, name, username, password };
+  console.log(userData)
 
   try {
     const user = await checkUserEntry(email, mobile, userData);

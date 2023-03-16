@@ -3,7 +3,9 @@ import { useSelector } from "react-redux";
 
 import { useNavigate} from "react-router-dom"
 
-// import { useHistory } from "react-router-dom";
+import Loader from "../loader/Loader";
+
+import backBtn from "../../assets/backbtn.svg"
 
 import { selectUser } from "../../store/authSlice";
 
@@ -13,12 +15,18 @@ import classes from "./Form100Words.module.css";
 import apis from "../../constants/apis";
 
 const Form100Words = () => {
-    const navigate = useNavigate()
+
+    const navigate = useNavigate();
+
+    const [popupDisplay, setPopupDisplay] = useState("none");
+    
+    const [loading, setLoading] = useState(false)
 
     const userID = localStorage.getItem("userId")
+    const subdomain = localStorage.getItem("subdomain")
 
     useEffect(()=>{
-        if(!userID || !localStorage.getItem("subdomain")){
+        if(!userID || !subdomain){
             navigate("/signup")
             setTimeout(()=>{
                 window.location.reload()
@@ -27,9 +35,6 @@ const Form100Words = () => {
     }, []) 
 
     const user = useSelector(selectUser);
-    const subdomain = localStorage.getItem("subdomain")
-
-
  
     // const history = useHistory();
 
@@ -42,6 +47,7 @@ const Form100Words = () => {
 
     function formSubmitHandler(e){
         e.preventDefault();
+        setLoading(true)
 
         fetch(`${apis.setupOneRupeePlan}`, {
             method: "POST",
@@ -54,11 +60,16 @@ const Form100Words = () => {
         .then(res => {
             if(res.sucess){
                 console.log(res)
-                navigate("/")
+                setLoading(false);
+                setPopupDisplay("flex")
+                // navigate("/")
                 // history.push("/onerupeeplan/finish");
                 // setTimeout(()=>{
                 //   window.location.reload()
                 // },100)
+            }else{
+                alert("Some Error occured please try again")
+                setLoading(false);
             }
         })
 
@@ -80,7 +91,7 @@ const Form100Words = () => {
     }
 
     return <div className={classes.container}>
-
+        {loading && <Loader />}
         {!preview && <div>
                <h1 className={classes.heading}>Edit your design</h1>
 
@@ -102,7 +113,7 @@ const Form100Words = () => {
 
         {preview && <div className={classes.previewcont}>
 
-               {/* <div className={classes.back} onClick={previewOCHandler}> <span><img src={backBtn} className={classes.img} /></span>Back</div> */}
+               <div className={classes.back} onClick={previewOCHandler}> <span><img src={backBtn} className={classes.img} /></span>Back</div>
 
                <h1 style={{marginTop: "1rem"}}>Preview</h1>
 
@@ -115,6 +126,19 @@ const Form100Words = () => {
                <button className={classes.submit} onClick={formSubmitHandler}>Publish Your Link</button>
 
             </div>}
+
+             {/* popup */}
+
+             <div className={classes.popup} style={{display: popupDisplay}}>
+
+                <div className={classes.pop}>
+
+                    <p>Your Link is Published sucessfully</p>
+                    
+                    <button className={classes.finish} onClick={()=>{navigate("/")}}>Finish</button>
+
+                </div>
+             </div>
     </div>
 }
 

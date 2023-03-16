@@ -1,4 +1,6 @@
-export const api = "http://localhost:8080/api";
+export const api = "http://doornextshop.com/api";
+export const api2 = "http://myty.in/api";
+
 
 const apis = {
   authenticate: `${api}/user`,
@@ -41,8 +43,8 @@ const apis = {
   findLinkPostByUserId: (user_id) => `${api}/link-post/findby-user/${user_id}`,
   linkPreview: `${api}/link-post/link-data`,
 
-  paymentCreateOrder: (plan) => `${api}/payment/create-order/${plan}`,
-  paymentVerifyResponse: `${api}/payment/verify-response`,
+  paymentCreateOrder: (plan) => `${api2}/payment/create-order/${plan}`,
+  paymentVerifyResponse: `${api2}/payment/verify-response`,
 
   searchResults: `${api}/search`,
   searchSuggestionResults: `${api}/search/suggestion`,

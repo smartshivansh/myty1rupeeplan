@@ -8,6 +8,7 @@ import classes from "./LinkAvailability.module.css"
 
 import Footer from "../footer/Footer"
 import PaymentButton from "../payment/Payment";
+import Loader from "../loader/Loader";
 
 import menu from "../../assets/menu.svg"
 import backbtn from "../../assets/backbtn.svg"
@@ -26,6 +27,8 @@ import apis, {api} from "../../constants/apis";
 export default function LinkAvailability(){
 
     localStorage.removeItem("password")
+
+    const [loading, setLoading] = useState(false)
 
     const Authed = useSelector(selectAuthed);
     const dispatch = useDispatch();
@@ -71,10 +74,12 @@ export default function LinkAvailability(){
     const formSubmitHandler = (e) => {
 
         e.preventDefault();
+        setLoading(true);
 
         if(subdomain.length < 8){
             setErrorColor(p => "red");
             setError(p => "please write more than 8 characters")
+            setLoading(false);
             return;
         }
 
@@ -84,6 +89,7 @@ export default function LinkAvailability(){
             const subdomainValidity = isValidSubdomain(subdomain);
             if (!subdomainValidity) {
               setValidity(false);
+              setLoading(false);
               return;
             }
         
@@ -94,11 +100,13 @@ export default function LinkAvailability(){
                 setBookLinkDisplay(p => "block")
                 setErrorColor(p => "#10BA01");
                 setError(p => "Available");
+                setLoading(false);
               } else {
                 setAvailibility(false);
                 // setBookLinkDisplay(p => "block")
                 setErrorColor(p => "red");
                 setError(p => "Not Available");
+                setLoading(false);
               }
             });
         
@@ -120,6 +128,8 @@ export default function LinkAvailability(){
       
       localStorage.setItem("subdomain", subdomain)
 
+      setLoading(true);
+
       try {
         await axios.patch(`${api}/onersplan/booksubdomain`, {userID: userId, subdomain})
       } catch (error) {
@@ -133,13 +143,17 @@ export default function LinkAvailability(){
         );
         dispatch(loadUserAsync());
         // setShowDialog(false);
+        setLoading(false);
         setcPopupDisplay(p => "flex")
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     }
 
     return <div className={classes.container}>
+             
+             {loading && <Loader />}
 
              <header className={classes.header}>
                  <img src={menu} alt="menu" className={classes.img} onClick={openNotification} />
@@ -207,7 +221,7 @@ export default function LinkAvailability(){
                     <p>Click the button Below to edit your design</p>
                     
                     <div className={classes.booklink}>
-                      <Link to="/preview">Edit your design</Link>
+                      <Link to="/preview" style={{textDecoration: "none", color: "black"}}>Edit your design</Link>
                     </div>
                     
                 </div>

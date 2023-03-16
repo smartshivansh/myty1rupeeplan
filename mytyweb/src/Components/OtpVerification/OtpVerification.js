@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import OTPInput from "otp-input-react";
 import { confirmOTP, submitUserInformation, requestForVerificationOTP } from "../signup.function";
 
+import Loader from "../loader/Loader";
+
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
@@ -10,6 +12,8 @@ import classes from "./OtpVerification.module.css";
 import xicon from "../../assets/xicon.svg"
 
 export default function OtpVerification(){
+
+    const [loading, setLoading] = useState(false)
 
     const [otp, setOtp] = useState("");
     const [popDisplay, setPopDisplay] = useState("none");
@@ -34,7 +38,7 @@ export default function OtpVerification(){
     }
 
     async function submitBasicForm(values) {
-        // setLoading(true);
+        setLoading(true);
         try {
           const res = await submitUserInformation(values);
           if (res) {
@@ -46,14 +50,14 @@ export default function OtpVerification(){
           console.log(error.message);
           return false;
         } finally {
-        //   setLoading(false);
+          setLoading(false);
         }
-      }
-    
+    }
 
     async function submitOTPForm(e) {
         setOTPError("");
         // setOtpMsg("");
+        setLoading(true);
     
         e.preventDefault();
         const values = {
@@ -68,20 +72,21 @@ export default function OtpVerification(){
             // setLoading(false);
             console.log("Moving next Page");
             await submitBasicForm(userDetails);
+            setLoading(false);
             navigate("/available")
             // setDisable(true);
           } else {
-            // setLoading(false);
+            setLoading(false);
             setOTPError("Some Error occured, maybe internet connection.");
           }
         } catch (error) {
           setOTPError(error.message);
-        //   setLoading(false);
+          setLoading(false);
         //   setDisable(true);
         }
-      }
+    }
     
-      async function handleChange(otp) {
+    async function handleChange(otp) {
         setOtp(otp);
         if (otp) {
           if (otp.length < 6) {
@@ -92,10 +97,10 @@ export default function OtpVerification(){
             setDisable(false);
           }
         }
-      }
+    }
 
-
-      async function resendOTP() {
+    async function resendOTP() {
+        setLoading(true);
         setOTPError("");
         let emailOrPhone = email ? mobile : email;
         console.log(emailOrPhone)
@@ -115,12 +120,15 @@ export default function OtpVerification(){
           }
         } catch (error) {
           console.log(error);
+          setLoading(false);
           setOTPError("something went wrong please try again later");
           return false;
         }
-      }
+    }
 
     return <div className={classes.container}>
+
+        {loading && setLoading}
 
         <form className={classes.form} onSubmit={submitOTPForm}>
 
@@ -129,7 +137,7 @@ export default function OtpVerification(){
             <p className={classes.content}>Please enter the OTP we have sent on your registered mobile/email.</p>
 
             <div className={classes.otp}>
-               <OTPInput value={otp} onChange={setOtp} onFocus={()=>{setOTPError("")}} autoFocus OTPLength={6} otpType="number" inputStyles={{width:"3rem", height:"3rem", fontSize:"1rem"}} inputClassName={classes.input} />
+               <OTPInput value={otp} onChange={setOtp} onFocus={()=>{setOTPError("")}} autoFocus OTPLength={6} otpType="number" inputStyles={{width:"2rem", height:"2rem", fontSize:"1rem"}} inputClassName={classes.input} />
                <p style={{marginTop:"1rem", alignSelf:"flex-start"}}>{OTPError}</p>
             </div>
 

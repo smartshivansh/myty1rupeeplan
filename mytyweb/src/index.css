@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@500&display=swap');
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  max-width: 1200px;
-  max-height: 100%;
-  margin: auto;
-  background-color: #E6E6E6;
+   background-color: red;
 }
 
 code {

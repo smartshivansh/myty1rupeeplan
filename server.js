@@ -199,7 +199,7 @@ app.use("/api/onersplan/booksubdomain", require("./server/api/routes/OneRupeePla
 app.use(express.static("build"));
 app.get("/*", (req, res) => {
   // console.log("host", config.get("host"));
-  res.sendFile(path.resolve(__dirname, "/build/index.html"));
+  res.sendFile(path.resolve(__dirname, "build", "index.html"));
 });
 
 const server = app.listen(PORT, () =>

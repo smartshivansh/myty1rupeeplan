@@ -11,6 +11,7 @@ import menu from "../../assets/menu.svg"
 import backbtn from "../../assets/backbtn.svg"
 
 import Footer from "../footer/Footer";
+import Loader from "../loader/Loader"
 
 import apis from "../../constants/apis";
 
@@ -20,6 +21,8 @@ import axios from "axios"
 export default function BookLinkForm(){
 
     const dispatch = useDispatch();
+
+    const [loading, setLoading] = useState(false)
 
     const [slideDisplay, setSlideDisplay] = useState("none");
     const [slideTransform, setSlideTransform] = useState("translateX(80%)")
@@ -84,7 +87,7 @@ export default function BookLinkForm(){
     }
 
     async function submitContactForm(values) {
-      // setLoading(true);
+      setLoading(true);
       // console.log(values);
       setEmailError("");
       setUsernameError("");
@@ -96,12 +99,12 @@ export default function BookLinkForm(){
           navigate("/otpverify")
           return res;
         } else {
-          // setLoading(false);
+          setLoading(false);
           setEmailError("Some Error occured, maybe internet connection.");
           return false;
         }
       } catch (error) {
-        // setLoading(false);
+        setLoading(false);
         // console.log(error);
         setEmailError(error.message);
         return false;
@@ -112,14 +115,18 @@ export default function BookLinkForm(){
 
         e.preventDefault()
 
+        setLoading(true)
+
         if(!accept){
           alert("please accept terms and condition");
+          setLoading(false)
           return;
         }
 
         const validate =  emailValidator(email);
 
         if(!validate){
+          setLoading(false)
           return;
         }
 
@@ -128,7 +135,7 @@ export default function BookLinkForm(){
         if(type=="email"){
           options = {
             emailOrPhone:email,
-            isEmail: "1",
+            isEmail: true,
             username,
             password,
             name
@@ -136,7 +143,7 @@ export default function BookLinkForm(){
         }else{
           options = {
             emailOrPhone:email,
-            isEmail: "0",
+            isEmail: false,
             username,
             password,
             name
@@ -163,20 +170,22 @@ export default function BookLinkForm(){
               localStorage.setItem("password", options.password)
             }
             await submitContactForm(options);
-            // setLoading(false);
+            setLoading(false);
             console.log(res)
             return res;
           }
-          // setLoading(false);
+          setLoading(false);
     
           return false;
         } catch (error) {
-          // setLoading(false)
+          setLoading(false)
           console.log(error)
         }
     }
 
     return <div className={classes.container} onSubmit={formSubmitHandler}>
+
+              {loading && <Loader />}
 
               <header className={classes.header}>
                  <img src={menu} alt="menu" className={classes.img} onClick={openNotification} />
@@ -204,7 +213,7 @@ export default function BookLinkForm(){
                 
                 <p className={classes.radio} >
                 <input type='checkbox' style={{marginRight: "0.5rem", width: "1rem", height: "1rem"}} onChange={(e)=>{setAccept(p=>e.target.checked)}} />
-                By creating an account you are agreeing to our <a target="_blank" href="https://myty.in/terms-conditions" className={classes.links}>Terms and Conditions</a> and <a target="_blank" href="https://myty.in/privacy-policy" className={classes.links}>Privacy Policy</a>
+                By creating an account you are agreeing to our <a target="_blank" href="https://app.myty.in/terms-conditions" className={classes.links}>Terms and Conditions</a> and <a target="_blank" href="https://app.myty.in/privacy-policy" className={classes.links}>Privacy Policy</a>
                 </p>
 
                 <button type="submit" className={classes.button} onClick={formSubmitHandler}>Sign Up</button>

@@ -28,7 +28,7 @@ export async function requestForVerificationOTP({ name, emailOrPhone }) {
     ? { mobile: emailOrPhone, name, email: null }
     : { email: emailOrPhone, name, mobile: null };
 
-    console.log(data)
+    console.log(emailOrPhone, data)
 
   try {
     const res = await axios.post(`${api}/auth/signup/request-otp`, data);

@@ -12,6 +12,7 @@ import OtpVerification from "./Components/OtpVerification/OtpVerification";
 import Protected from "./Components/protected/Protected";
 import Login from "./Components/login/login";
 import Form100Words from "./Components/1rupeePlan/Form100Words";
+import Loader from "./Components/Loader";
 
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 
@@ -77,6 +78,8 @@ function App() {
         <Route exact path="/login" element={<Login />} />
 
         <Route exact path="/preview" element={<Form100Words />} />
+
+        <Route exact path="/loader" element={<Loader />} />
 
       </Routes>
     </Router>

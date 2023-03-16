@@ -77,8 +77,8 @@
     background-color: #FFC700;
     border: none;
     margin-top: 1rem;
-    padding: 0.5rem;
     font-size: 1.5rem;
+    padding: 0 1rem;
 }
 
 .preview{
@@ -139,6 +139,38 @@
     padding: 1rem;
     word-wrap: break-word;
     white-space: initial;
+}
+
+.popup{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pop{
+    padding: 3rem 2rem;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 3rem;
+    background-color: #ffffff;
+    position: relative;
+    text-align: center;
+    max-width: 98%;
+}
+
+.finish{
+    background-color: #FFC700;
+    border: none;
+    padding: 2px 1rem;
+    border-radius: 4px;
 }
 
 @media(max-width:1500px){
@@ -213,5 +245,10 @@
     .link{
         font-size: 0.75rem;
         width: 100%;
+    }
+
+    .pop{
+        padding: 8px;
+        line-height: 2rem;
     }
 }
