@@ -1,5 +1,5 @@
 export const api = "http://doornextshop.com/api";
-export const api2 = "http://myty.in/api";
+export const api2 = "https://myty.in/api";
 
 
 const apis = {

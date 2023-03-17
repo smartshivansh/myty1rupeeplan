@@ -64,11 +64,13 @@ const MeanuBar = (props) => {
         
         <p className={classes.name}>{name}</p>
 
+        <a className={classes.menuBtn} href="/">Home</a>
+
         <div style={{display: isLogedIn ? "none" : "flex"}} className={classes.sign}>
            <a className={classes.menuBtn} href="/signup">Signup</a>
-           <a className={classes.menuBtn} href="/login">login</a>
+           <a className={classes.menuBtn} href="/login">Login</a>
         </div>
-          <a className={classes.menuBtn} href="/">Home</a>
+          
           <a className={classes.menuBtn} href="https://app.myty.in/privacy-policy" target="_blank">Privacy Policy</a>
           <a className={classes.menuBtn} href="https://app.myty.in/terms-conditions" target="_blank">Terms and Condition</a>
         <div style={{display: isLogedIn ? "block" : "none"}}>
