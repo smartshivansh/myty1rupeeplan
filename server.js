@@ -1,5 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const app = express();
+
+const http = require('http');
+const servers = http.createServer(app);
+
 const userAnalytics = require("./middleware/userAnalytics");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -8,10 +13,25 @@ const PORT = process.env.PORT || config.get("port");
 const HOST = config.get("host");
 const sockets = require("./socket_copy");
 const { watchingByTypesense } = require("./utils/typesense/actions");
+const { Server } = require("socket.io");
 
-const app = express();
+const { Configuration, OpenAIApi } = require("openai");
+const configuration = new Configuration({
+  apiKey: config.get("openai_key")
+});
+
+const openai = new OpenAIApi(configuration);
+
+
+
+const io = new Server(servers, {
+  cors: ["http://localhost:3000"]
+});
 
 app.use(express.json());
+
+
+
 
 // const redis = require("redis");
 // const client = redis.createClient();
@@ -202,12 +222,40 @@ app.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "build", "index.html"));
 });
 
-const server = app.listen(PORT, () =>
+io.on('connection', (socket) => {
+
+  const user = {
+    prompt: ""
+  }
+
+  console.log("connected")
+
+   socket.on('msgTextReq', async (data) => {
+
+   user.prompt = user.prompt + data.text;
+
+    const response = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: user.prompt,
+      temperature: 0.9,
+      max_tokens: 150,
+      top_p: 1,
+      frequency_penalty: 0.0,
+      presence_penalty: 0.6,
+      stop: [" Human:", " AI:"],
+    });
+    user.prompt = user.prompt + response.data.choices[0].text
+    socket.emit('msgTextRes', {response: `${response.data.choices[0].text}`, msg: data.msg} );
+  });
+  
+});
+
+servers.listen(PORT, () =>
   console.log(`server is running on ${Url}`)
 );
 
 //socket.init(server);
-sockets.init(server);
+// sockets.init(server);
 
 // const Url = `http://${HOST}`;
 const Url = `http://localhost:${PORT}`;

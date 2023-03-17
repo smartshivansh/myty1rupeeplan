@@ -45,6 +45,7 @@
     "multer-s3": "^2.9.0",
     "node-wget": "^0.4.3",
     "nodemailer": "^6.6.1",
+    "openai": "^3.2.1",
     "random-number": "0.0.9",
     "razorpay": "^2.0.7",
     "react-router-dom": "^6.9.0",
