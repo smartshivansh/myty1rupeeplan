@@ -59,10 +59,11 @@ export default function BookLinkForm(){
         }
       }
       else{
-        if(email.lenght === 10){
+        if(email.length === 10){
           setType(p => "mobile")
           return "mobile"
         }else{
+          console.log(email.length)
           setEmailError("Invalid Mobile Number")
           return "none";
         }
