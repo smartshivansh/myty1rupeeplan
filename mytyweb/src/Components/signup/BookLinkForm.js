@@ -89,10 +89,12 @@ export default function BookLinkForm(){
       // console.log(values);
       setEmailError("");
       setUsernameError("");
-      
+
+      let options = {emailOrPhone: email, name}
   
       try {
-        const res = await requestForVerificationOTP(values);
+        const res = await requestForVerificationOTP(options);
+        console.log(res)
         if (res) {
           console.log("Moving next Page in submitContactForm");
           navigate("/otpverify")
@@ -104,7 +106,7 @@ export default function BookLinkForm(){
         }
       } catch (error) {
         setLoading(false);
-        // console.log(error);
+        console.log(error);
         setEmailError(error.message);
         return false;
       }
@@ -121,9 +123,7 @@ export default function BookLinkForm(){
           setLoading(false)
           return;
         }
-        console.log(type)
         const validate =  emailValidator(email);
-        console.log(type)
 
         if(!validate){
           setLoading(false)
@@ -153,7 +153,7 @@ export default function BookLinkForm(){
         try {
           const res = await axios.post(`${apis.checkUser}`,options);
           console.log(res)
-          if (res.status === 201) {
+          
             setUser(res.data.user);
             if(type=="email"){
               localStorage.setItem("email", options.emailOrPhone)
@@ -173,10 +173,8 @@ export default function BookLinkForm(){
             setLoading(false);
             console.log(res)
             return res;
-          }
+          
           setLoading(false);
-    
-          return false;
         } catch (error) {
           setLoading(false)
           console.log(error)

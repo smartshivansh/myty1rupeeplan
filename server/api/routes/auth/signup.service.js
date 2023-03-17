@@ -226,12 +226,13 @@ async function checkUserEntry(email, mobile, userData) {
       } else {
         return userData;
       }
-
     }
   }
 
   if (email) {
     const existingEmail = await user.findOne({ email: email });
+
+    console.log(existingEmail, email)
 
     if (existingEmail) {
       throw new Error(authErrors.duplicateEmail.message);

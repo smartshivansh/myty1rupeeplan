@@ -66,7 +66,14 @@ Router.patch("/confirm-otp", async (req, res) => {
 Router.post("/check-user", async (req, res) => {
   const { email, mobile, name, username, password } = req.body;
 
-  const userData = { email, mobile, name, username, password };
+  let userData
+
+
+  if(isNaN(mobile)){
+    userData = {email:mobile, mobile:email, username}
+  }else{
+    userData = {mobile, email, username}
+  }
   console.log(1111, userData)
 
   try {
