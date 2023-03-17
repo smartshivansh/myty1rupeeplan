@@ -9,7 +9,7 @@ const SignupSchema = new Schema(
       // unique: true,
     },
     mobile: {
-      type: Number,
+      type: String,
       // unique: true,
       // default: null,
     },

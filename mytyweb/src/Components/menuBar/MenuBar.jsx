@@ -1,14 +1,17 @@
 import {useState, useEffect} from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import backBtn from "../../assets/backbtn.svg"
 import mytyIcon from "../../assets/mytyIcon.svg"
 
 import classes from "./MenuBar.module.css"
 
+import {userUpdate} from "../../store/UserSlice"
+
 
 const MeanuBar = (props) => {
-
+   
+    const dispatch = useDispatch()
 
     useEffect(()=>{
         if(props.isOpen){

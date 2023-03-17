@@ -24,8 +24,9 @@ const Router = express.Router();
 
 Router.post("/request-otp", async (req, res) => {
   const { email, mobile } = req.body;
-  const hash = req.body?.hash ?? "";
   console.log(email, mobile)
+  const hash = req.body?.hash ?? "";
+  
 
   try {
     if (mobile) {
@@ -64,7 +65,7 @@ Router.patch("/confirm-otp", async (req, res) => {
 });
 
 Router.post("/check-user", async (req, res) => {
-  const { email, mobile, name, username, password } = req.body;
+  let { email, mobile, name, username, password } = req.body;
 
   let userData
 
@@ -75,6 +76,9 @@ Router.post("/check-user", async (req, res) => {
     userData = {mobile, email, username}
   }
   console.log(1111, userData)
+
+   email = userData.email;
+   mobile = userData.mobile;
 
   try {
     const user = await checkUserEntry(email, mobile, userData);
