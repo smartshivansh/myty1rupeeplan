@@ -18,6 +18,7 @@ import SendBubble from "../msgBubbles/SendBubble";
 import ReplyBubble from "../msgBubbles/ReplyBubble";
 import NotificationBubble from "../msgBubbles/NotificationBubble";
 import Loader from "../loader/Loader";
+import MeanuBar from "../menuBar/MenuBar";
 
 import { chatUpdate } from "../../store/UserSlice";
 
@@ -50,6 +51,7 @@ export default function Main(){
     const [menuTransform, setMenuTransform] = useState("translateX(80%)")
     const [menuTransition, setMenuTransition] = useState("all 0.5s")
     const [menuOpacity, setMenuOpacity] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
 
     const notifications = useSelector(s => s.notification.Notifications)
 
@@ -139,22 +141,12 @@ export default function Main(){
         }, 1000)
     }
 
-    const openMenuBar = () => {   
-        setMenuDisplay(p => "block");
-        setTimeout(()=>{
-            setMenuTransform(p => "translateX(0%)")
-            setMenuTransition(p => p)
-            setMenuOpacity(p => 1)
-        }, 100)
+    const openMenuBar = () => {     
+        setIsOpen(p => true)
     }
 
     const closeMenuBar = () => {
-        setMenuTransform(p => "translateX(80%)")
-        setMenuTransition(p => p)
-        setMenuOpacity(p => 0)
-        setTimeout(()=>{
-            setMenuDisplay(p => "none");
-        }, 1000)
+        setIsOpen(p => false)
     }
 
 
@@ -216,7 +208,9 @@ export default function Main(){
 
          {/* menu bar */}
 
-         <div className={classes.notification} style={{opacity: menuOpacity ,transform: menuTransform, display: menuDisplay, transition: menuTransition}} >
+         <MeanuBar isOpen={isOpen} closeMenuBar={closeMenuBar} />
+
+         {/* <div className={classes.notification} style={{opacity: menuOpacity ,transform: menuTransform, display: menuDisplay, transition: menuTransition}} >
 
             <header className={classes.notificationHeader} >
                 <img src={backBtn} className={classes.img} alt="back" onClick={closeMenuBar} style={{transform: "rotate(180deg"}} />
@@ -231,6 +225,7 @@ export default function Main(){
                    <a className={classes.menuBtn} href="/signup">Signup</a>
                    <a className={classes.menuBtn} href="/login">login</a>
                 </div>
+                  <a className={classes.menuBtn} href="/">Home</a>
                   <a className={classes.menuBtn} href="https://app.myty.in/privacy-policy" target="_blank">Privacy Policy</a>
                   <a className={classes.menuBtn} href="https://app.myty.in/terms-conditions" target="_blank">Terms and Condition</a>
                 <div style={{display: isLogedIn ? "block" : "none"}}>
@@ -238,7 +233,7 @@ export default function Main(){
                 </div>
             </main>
             
-         </div>
+         </div> */}
     </div>
     </div>
 }

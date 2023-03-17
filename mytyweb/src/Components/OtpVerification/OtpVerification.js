@@ -3,6 +3,7 @@ import OTPInput from "otp-input-react";
 import { confirmOTP, submitUserInformation, requestForVerificationOTP } from "../signup.function";
 
 import Loader from "../loader/Loader";
+import MeanuBar from "../menuBar/MenuBar";
 
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
@@ -10,6 +11,7 @@ import { useSelector } from "react-redux";
 import classes from "./OtpVerification.module.css";
 
 import xicon from "../../assets/xicon.svg"
+import menu from "../../assets/menu.svg"
 
 export default function OtpVerification(){
 
@@ -24,6 +26,8 @@ export default function OtpVerification(){
     const name = localStorage.getItem("name");
     const username = localStorage.getItem("username");
     const password = localStorage.getItem("password")
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const userDetails = {email, username, name, password, mobile}
 
@@ -126,9 +130,22 @@ export default function OtpVerification(){
         }
     }
 
+    const openMenuBar = () => {     
+      setIsOpen(p => true)
+    }
+
+    const closeMenuBar = () => {
+      setIsOpen(p => false)
+    }
+    
+
     return <div className={classes.container}>
 
-        {loading && setLoading}
+        {loading && <Loader />}
+
+        <header className={classes.header}>
+            <img src={menu} alt="menu" className={classes.img} onClick={openMenuBar} />
+        </header>
 
         <form className={classes.form} onSubmit={submitOTPForm}>
 
@@ -146,6 +163,8 @@ export default function OtpVerification(){
             <button className={classes.resend} onClick={resendOTP}>Resend OTP</button>
 
         </form>
+
+        <MeanuBar isOpen={isOpen} closeMenuBar={closeMenuBar} />
 
         <div className={classes.popup} style={{display: popDisplay}}>
 

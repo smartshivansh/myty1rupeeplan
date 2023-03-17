@@ -10,6 +10,7 @@ import classes from "./login.module.css";
 import menu from "../../assets/menu.svg"
 import backbtn from "../../assets/backbtn.svg"
 import Loader from "../loader/Loader"
+import MeanuBar from "../menuBar/MenuBar";
 
 import Footer from "../footer/Footer";
 import { api } from "../../constants/apis"
@@ -31,6 +32,8 @@ export default function Login(){
 
     const [emailOrPhone, setEmailOrPhone] = useState("");
     const [password, setPassword] = useState("");
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const navigate = useNavigate();
 
@@ -98,19 +101,27 @@ export default function Login(){
         });
     };
 
+    const openMenuBar = () => {     
+      setIsOpen(p => true)
+    }
+
+    const closeMenuBar = () => {
+      setIsOpen(p => false)
+    }
+
     return <div className={classes.container} >
 
               {loading && <Loader />}
 
               <header className={classes.header}>
-                 <img src={menu} alt="menu" className={classes.img} onClick={openNotification} />
+                 <img src={menu} alt="menu" className={classes.img} onClick={openMenuBar} />
               </header>
 
               <h1 className={classes.heading}>Log In</h1>
 
               <form className={classes.form} onSubmit={LoginSubmit}>
 
-                <p className={classes.fromHeading}>Enter ypuy mobile Number to continue </p>
+                <p className={classes.fromHeading}>Enter your mobile Number/email to continue </p>
 
                 <input required className={classes.input} placeholder="mobile/Email" value={emailOrPhone} onChange={(e)=>{setEmailOrPhone(p=>e.target.value)}}  />
                 <p style={{display: `${error == "" ? "none" : "block"}`}} className={classes.error}>{error}</p>
@@ -123,7 +134,9 @@ export default function Login(){
 
                 {/* menu slide */}
 
-              <div className={classes.menuslide} style={{opacity: slideOpacity ,transform: slideTransform, display: slideDisplay, transition: slideTransition}}>
+                <MeanuBar isOpen={isOpen} closeMenuBar={closeMenuBar} />
+
+              {/* <div className={classes.menuslide} style={{opacity: slideOpacity ,transform: slideTransform, display: slideDisplay, transition: slideTransition}}>
                <header className={classes.menuheader}>
                  <img src={backbtn} alt="menu" id={classes.backbtn} className={classes.img} onClick={closeNotification} />
                  <img src={menu} alt="menu" className={classes.img} />
@@ -136,7 +149,7 @@ export default function Login(){
                      <li><a href="mailto:care@myty.in" className={classes.link}>care@myty.in</a></li>
                  </ul>
                </div>
-             </div>
+             </div> */}
 
              {/* <Footer /> */}
           </div>

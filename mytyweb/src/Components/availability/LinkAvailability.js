@@ -9,6 +9,7 @@ import classes from "./LinkAvailability.module.css"
 import Footer from "../footer/Footer"
 import PaymentButton from "../payment/Payment";
 import Loader from "../loader/Loader";
+import MeanuBar from "../menuBar/MenuBar";
 
 import menu from "../../assets/menu.svg"
 import backbtn from "../../assets/backbtn.svg"
@@ -50,6 +51,8 @@ export default function LinkAvailability(){
     const [subdomain, setSubDomain] = useState("");
     const [validity, setValidity] = useState(true);
     const [availibility, setAvailibility] = useState(null);
+
+    const [isOpen, setIsOpen] = useState(false)
 
     const userId = localStorage.getItem("userId")
 
@@ -151,12 +154,20 @@ export default function LinkAvailability(){
       }
     }
 
+    const openMenuBar = () => {     
+      setIsOpen(p => true)
+    }
+
+    const closeMenuBar = () => {
+      setIsOpen(p => false)
+    }
+
     return <div className={classes.container}>
              
              {loading && <Loader />}
 
              <header className={classes.header}>
-                 <img src={menu} alt="menu" className={classes.img} onClick={openNotification} />
+                 <img src={menu} alt="menu" className={classes.img} onClick={openMenuBar} />
              </header>
 
              <div className={classes.subContainer}>
@@ -183,7 +194,9 @@ export default function LinkAvailability(){
 
               {/* menu slide */}
 
-             <div className={classes.menuslide} style={{opacity: slideOpacity ,transform: slideTransform, display: slideDisplay, transition: slideTransition}}>
+              <MeanuBar isOpen={isOpen} closeMenuBar={closeMenuBar} />
+
+             {/* <div className={classes.menuslide} style={{opacity: slideOpacity ,transform: slideTransform, display: slideDisplay, transition: slideTransition}}>
                <header className={classes.menuheader}>
                  <img src={backbtn} alt="menu" id={classes.backbtn} className={classes.img} onClick={closeNotification} />
                  <img src={menu} alt="menu" className={classes.img} />
@@ -196,7 +209,7 @@ export default function LinkAvailability(){
                      <li><a href="mailto:care@myty.in" className={classes.link}>care@myty.in</a></li>
                  </ul>
                </div>
-             </div>
+             </div> */}
 
 
              {/* popup */}

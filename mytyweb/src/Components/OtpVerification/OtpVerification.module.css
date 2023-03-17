@@ -9,10 +9,27 @@
     min-height: 100vh;
     margin: auto;
     background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     padding: 1rem;
+    max-width: 900px;
+    margin: auto;
+}
+
+.header{
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.img{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 1rem 0;
+}
+
+.img:hover{
+    cursor: pointer;
 }
 
 .form{
@@ -20,6 +37,7 @@
     flex-direction: column;
     align-items: center;
     width: 24rem;
+    margin: auto;
 }
 
 .heading{

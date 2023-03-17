@@ -7,13 +7,15 @@
 
 .container{
     position: relative;
-    width: 100%;
+    width: 900px;
     height: 100%;
     background-color: white;
     min-height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    max-width: 1200px;
+    margin: auto;
 }   
 
 .subContainer{
@@ -224,13 +226,14 @@
     width: 100%;
 }
 
-@media(max-width:1050px){
-    .footer{
-        position: relative;
+
+@media (max-width: 900px){
+    .container{
+        width: 100%;
     }
 }
 
-@media (max-width:600px){
+@media (max-width: 650px){
 
     .subContainer{
         max-width: 95%;
@@ -245,7 +248,10 @@
     .content, .condition{
         max-width: 95%;
     }
+    
 }
+
+
 
 @media (max-width:550px){
 
@@ -300,6 +306,10 @@
         font-size: 0.8rem;
     }
 
+    .sublink, .condition{
+        font-size: 0.8rem;
+    }
+
     .button{
         height: 2rem;
         width: 5rem;
@@ -348,4 +358,4 @@
         width: 100%;
         font-size: 1rem;
     }
-}
+} 

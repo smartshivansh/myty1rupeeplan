@@ -12,6 +12,7 @@ import backbtn from "../../assets/backbtn.svg"
 
 import Footer from "../footer/Footer";
 import Loader from "../loader/Loader"
+import MeanuBar from "../menuBar/MenuBar";
 
 import apis from "../../constants/apis";
 
@@ -43,6 +44,7 @@ export default function BookLinkForm(){
     const [type, setType] = useState("none");
 
     const [user, setUser] = useState(null)
+    const [isOpen, setIsOpen] = useState(false);
 
     const navigate = useNavigate()
 
@@ -183,12 +185,20 @@ export default function BookLinkForm(){
         }
     }
 
+    const openMenuBar = () => {     
+      setIsOpen(p => true)
+    }
+
+    const closeMenuBar = () => {
+      setIsOpen(p => false)
+    }
+
     return <div className={classes.container} onSubmit={formSubmitHandler}>
 
               {loading && <Loader />}
 
               <header className={classes.header}>
-                 <img src={menu} alt="menu" className={classes.img} onClick={openNotification} />
+                 <img src={menu} alt="menu" className={classes.img} onClick={openMenuBar} />
               </header>
 
               <h1 className={classes.heading}>SignUp</h1>
@@ -213,7 +223,7 @@ export default function BookLinkForm(){
                 
                 <p className={classes.radio} >
                 <input type='checkbox' style={{marginRight: "0.5rem", width: "1rem", height: "1rem"}} onChange={(e)=>{setAccept(p=>e.target.checked)}} />
-                By creating an account you are agreeing to our <a target="_blank" href="https://app.myty.in/terms-conditions" className={classes.links}>Terms and Conditions</a> and <a target="_blank" href="https://app.myty.in/privacy-policy" className={classes.links}>Privacy Policy</a>
+                By creating the account you are agreeing to our <a target="_blank" href="https://app.myty.in/terms-conditions" className={classes.links}>Terms and Conditions</a> and <a target="_blank" href="https://app.myty.in/privacy-policy" className={classes.links}>Privacy Policy</a>
                 </p>
 
                 <button type="submit" className={classes.button} onClick={formSubmitHandler}>Sign Up</button>
@@ -224,8 +234,10 @@ export default function BookLinkForm(){
               </form>
 
                 {/* menu slide */}
+              
+                <MeanuBar isOpen={isOpen} closeMenuBar={closeMenuBar} />
 
-              <div className={classes.menuslide} style={{opacity: slideOpacity ,transform: slideTransform, display: slideDisplay, transition: slideTransition}}>
+              {/* <div className={classes.menuslide} style={{opacity: slideOpacity ,transform: slideTransform, display: slideDisplay, transition: slideTransition}}>
                <header className={classes.menuheader}>
                  <img src={backbtn} alt="menu" id={classes.backbtn} className={classes.img} onClick={closeNotification} />
                  <img src={menu} alt="menu" className={classes.img} />
@@ -238,7 +250,7 @@ export default function BookLinkForm(){
                      <li><a href="mailto:care@myty.in" className={classes.link}>care@myty.in</a></li>
                  </ul>
                </div>
-             </div>
+             </div> */}
 
              {/* <Footer /> */}
           </div>
