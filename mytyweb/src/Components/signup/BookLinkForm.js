@@ -136,16 +136,16 @@ export default function BookLinkForm(){
 
         if(type=="email"){
           options = {
-            emailOrPhone:email,
-            isEmail: true,
+            email:email,
+            mobile: null,
             username,
             password,
             name
           }
         }else{
           options = {
-            emailOrPhone:email,
-            isEmail: false,
+            mobile:email,
+            email: null,
             username,
             password,
             name
@@ -182,6 +182,15 @@ export default function BookLinkForm(){
         } catch (error) {
           setLoading(false)
           console.log(error)
+          if(error.response.data === "DUPLICATE_EMAIL"){
+            setEmailError("Email already registered")
+          }
+          else if(error.response.data === "DUPLICATE_MOBILE"){
+            setEmailError("Mobile No already registered")
+          }
+          else if(error.response.data === "DUPLICATE_USERNAME"){
+            setUsernameError("Username already registered")
+          }
         }
     }
 

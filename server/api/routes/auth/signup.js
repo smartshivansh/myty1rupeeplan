@@ -67,7 +67,7 @@ Router.post("/check-user", async (req, res) => {
   const { email, mobile, name, username, password } = req.body;
 
   const userData = { email, mobile, name, username, password };
-  console.log(userData)
+  console.log(1111, userData)
 
   try {
     const user = await checkUserEntry(email, mobile, userData);
@@ -94,7 +94,7 @@ Router.post("/submit-user", async (req, res) => {
   );
 
   try {
-    const user = await createUserEntry(email, mobile, userData);
+    const user = await createUserEntry(email, mobile,username, userData);
     // console.log(user);
 
     const token = generateJWT({ id: user._id });
