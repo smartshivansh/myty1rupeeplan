@@ -190,6 +190,11 @@
 #backbtn{
     transform: rotateZ(180deg);
 }
+@media (max-width:900px){
+    .container{
+        width: 100%;
+    }
+}
 
 @media (max-width:550px){
     .container{

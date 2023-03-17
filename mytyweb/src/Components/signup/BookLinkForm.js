@@ -54,19 +54,15 @@ export default function BookLinkForm(){
         setEmailError(null);
         setType(p => "email")
         return true;
-      } else {
-        if (isNaN(email)) {
-          setEmailError("Invalid email Address");
-          return false;
-        }
-        if (email.length !== 10) {
-          setEmailError("Mobile number must have 10 digit");
-          return false;
-        } else {
-          setEmailError(null);
-          setType(p => "mobile")
-          return true;
-        }
+      } 
+      else if(isNaN(email)){
+        setEmailError("Invalid email address");
+        return false;
+      }
+      else if(email.length === 10){
+        setEmailError("");
+        setType(p => "mobile")
+        return true;
       }
     };
 
@@ -87,12 +83,13 @@ export default function BookLinkForm(){
             setSlideDisplay(p => "none");
         }, 1000)
     }
-
+    
     async function submitContactForm(values) {
       setLoading(true);
       // console.log(values);
       setEmailError("");
       setUsernameError("");
+      
   
       try {
         const res = await requestForVerificationOTP(values);
@@ -124,8 +121,9 @@ export default function BookLinkForm(){
           setLoading(false)
           return;
         }
-
+        console.log(type)
         const validate =  emailValidator(email);
+        console.log(type)
 
         if(!validate){
           setLoading(false)
