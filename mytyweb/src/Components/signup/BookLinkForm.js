@@ -49,20 +49,23 @@ export default function BookLinkForm(){
     const navigate = useNavigate()
 
     const emailValidator = (email) => {
-
-      if (validate(email)) {
-        setEmailError(null);
-        setType(p => "email")
-        return true;
-      } 
-      else if(isNaN(email)){
-        setEmailError("Invalid email address");
-        return false;
+      if(isNaN(email)){
+        if(validate(email)){
+          setType(p => "email")
+          return "email";
+        }else{
+          setEmailError("Invalid Email Address")
+          return "none"
+        }
       }
-      else if(email.length === 10){
-        setEmailError("");
-        setType(p => "mobile")
-        return true;
+      else{
+        if(email.lenght === 10){
+          setType(p => "mobile")
+          return "mobile"
+        }else{
+          setEmailError("Invalid Mobile Number")
+          return "none";
+        }
       }
     };
 
@@ -123,16 +126,19 @@ export default function BookLinkForm(){
           setLoading(false)
           return;
         }
-        const validate =  emailValidator(email);
+        const validate = emailValidator(email);
+        console.log(validate)
 
-        if(!validate){
+        if(validate === "none"){
           setLoading(false)
           return;
         }
 
+        console.log(type)
+
         let options;
 
-        if(type=="email"){
+        if(validate=="email"){
           options = {
             email:email,
             mobile: null,
@@ -155,15 +161,15 @@ export default function BookLinkForm(){
           console.log(res)
           
             setUser(res.data.user);
-            if(type=="email"){
-              localStorage.setItem("email", options.emailOrPhone)
+            if(validate=="email"){
+              localStorage.setItem("email", options.email)
               localStorage.setItem("name", options.name)
               localStorage.setItem("username", options.username)
               localStorage.setItem("password", options.password)
               localStorage.setItem("mobile", null)
             }
             else{
-              localStorage.setItem("mobile", options.emailOrPhone)
+              localStorage.setItem("mobile", options.mobile)
               localStorage.setItem("email", null)
               localStorage.setItem("name", options.name)
               localStorage.setItem("username", options.username)
