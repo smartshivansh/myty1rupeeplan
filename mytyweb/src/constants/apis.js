@@ -1,5 +1,5 @@
-export const api = "https://myty.in/api";
-export const api2 = "https://myty.in/api";
+export const api = "http://localhost:8080/api";
+export const api2 = "http://localhost:8080/api";
 
 
 const apis = {

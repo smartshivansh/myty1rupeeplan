@@ -27,6 +27,12 @@ import apis, {api} from "../../constants/apis";
 
 export default function LinkAvailability(){
 
+    useEffect(()=>{
+       if(!localStorage.getItem('isLogedIn')){
+         navigate("/login")
+       }
+    })
+
     localStorage.removeItem("password")
 
     const [loading, setLoading] = useState(false)

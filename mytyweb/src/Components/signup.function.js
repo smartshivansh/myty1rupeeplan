@@ -95,6 +95,7 @@ export async function confirmOTP({ otp }) {
 }
 
 export async function submitUserInformation({ username, password }) {
+  console.log(username, password)
   try {
     const res = await axios.post(`${api}/auth/signup/submit-user`, {
       ...signupInfo,

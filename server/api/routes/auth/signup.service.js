@@ -250,6 +250,7 @@ async function checkUserEntry(email, mobile, userData) {
 }
 
 async function createUserEntry(email, mobile, userData) {
+  console.log(userData)
   const existing = await user.findOne({ username: userData.username });
 
   console.log(

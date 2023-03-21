@@ -32,6 +32,7 @@ export default function OtpVerification(){
     const userDetails = {email, username, name, password, mobile}
 
     const navigate = useNavigate();
+    console.log(userDetails)
 
     function closePopHandler(){
         navigate("/");
@@ -74,6 +75,7 @@ export default function OtpVerification(){
           const res = await confirmOTP({email,mobile, otp});
           if (res) {
             // setLoading(false);
+            localStorage.setItem("isLogedIn", true)
             console.log("Moving next Page");
             await submitBasicForm(userDetails);
             setLoading(false);
