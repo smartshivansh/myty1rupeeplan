@@ -32,7 +32,7 @@ export default function OtpVerification(){
     const userDetails = {email, username, name, password, mobile}
 
     const navigate = useNavigate();
-    console.log(userDetails)
+    // console.log(userDetails)
 
     function closePopHandler(){
         navigate("/");
@@ -79,6 +79,7 @@ export default function OtpVerification(){
             console.log("Moving next Page");
             await submitBasicForm(userDetails);
             setLoading(false);
+            setTimeout(()=>{window.location.reload()},100)
             navigate("/available")
             // setDisable(true);
           } else {
