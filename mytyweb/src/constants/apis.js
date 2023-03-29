@@ -1,5 +1,5 @@
 export const api = "https://bot.myty.in/api";
-export const api2 = "https://bot.myty.in/api";
+export const api2 = "https://myty.in/api";
 
 
 const apis = {
