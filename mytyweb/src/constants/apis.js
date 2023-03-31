@@ -1,7 +1,7 @@
 //export const api = "https://myty.in/api";
 //export const api2 = "https://myty.in/api";
 
-export const api = "https://myty.in/api";
+export const api = "https://bot.myty.in/api";
 export const api2 = "https://myty.in/api";
 
 
