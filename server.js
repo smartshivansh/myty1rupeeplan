@@ -216,10 +216,10 @@ app.use("/api/onersplan/booksubdomain", require("./server/api/routes/OneRupeePla
 //   // console.log("host", config.get("host"));
 //   res.sendFile(path.resolve(__dirname, 'myty-client', 'build', 'index.html'));
 // });
-app.use(express.static("build"));
+app.use(express.static("mytyweb/build"));
 app.get("/*", (req, res) => {
   // console.log("host", config.get("host"));
-  res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  res.sendFile(path.resolve(__dirname,"mytyweb", "build", "index.html"));
 });
 
 io.on('connection', (socket) => {

@@ -25,14 +25,14 @@ const Form100Words = () => {
     const userID = localStorage.getItem("userId")
     const subdomain = localStorage.getItem("subdomain")
 
-    useEffect(()=>{
-        if(!userID || !subdomain){
-            navigate("/signup")
-            setTimeout(()=>{
-                window.location.reload()
-            },100)
-        }
-    }, []) 
+    // useEffect(()=>{
+    //     if(!userID || !subdomain){
+    //         navigate("/signup")
+    //         setTimeout(()=>{
+    //             window.location.reload()
+    //         },100)
+    //     }
+    // }, []) 
 
     const user = useSelector(selectUser);
  

@@ -78,7 +78,7 @@ export default function Main(){
         setMessages(p => [...p, {type: "text", content: value}])
         dispatch(chatUpdate({chat: {type: "text", content: value}, prompt}))
         setValue("");
-        console.log(prompt)
+        //console.log(prompt)
 
         // fetch("http://localhost:8080/api/chatupdate",{
         //     method: "POST",
